@@ -12,13 +12,13 @@ namespace BlueLockProject
 
         public Bot(Config config)
         {
-            _client = new DiscordSocketClient();
             _config = config;
-
         }
 
         public async Task RunAsync()
         {
+            _client = new DiscordSocketClient();
+
             await _client.LoginAsync(TokenType.Bot, _config.Token);
             await _client.StartAsync();
 
@@ -32,8 +32,9 @@ namespace BlueLockProject
         private async Task OnMessageReceived(SocketMessage message)
         {
             // bot message handling logic
-            if (message.Content == "blue lock")
+            if (message.Content.Contains("blue lock"))
             {
+                await Console.Out.WriteLineAsync("a mensagem chegou!!!");
                 await message.Channel.SendMessageAsync("Torne-se aquele que escolhe, e não aquele que espera pra ser escolhido.");
             }
         }
